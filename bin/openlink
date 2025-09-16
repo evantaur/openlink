@@ -1,0 +1,33 @@
+#!/bin/bash
+# Script that opens video links in mpv instead of browser
+# 
+ 
+# Configs
+BROWSER=""
+
+# Script
+CONFIG_PATH="$HOME/.config/openlink"
+if [[ ! -f "$CONFIG_PATH" ]]; then
+    echo '
+# Add your trash sites below
+trash_sites=(
+    "facebook.com"
+    "instagram.com"
+    "tiktok.com"
+    "youtube.com"
+)' | tee $CONFIG_PATH
+fi
+source $CONFIG_PATH
+
+url="$1"
+
+[[ -z $url ]] && exit 0
+for site in "${trash_sites[@]}"; do
+    if [[ "$url" == *"$site"* ]]; then
+        filth=1
+        mpv "$url" &> /dev/null & disown
+        exit 0
+    fi
+done
+exec "$BROWSER" "$url"
+

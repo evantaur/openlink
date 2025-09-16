@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=OpenLink
+Comment=Route trash sites to mpv, others to browser
+Type=Application
+Exec=/home/USER_NAME/.local/bin/openlink %u
+Terminal=false
+MimeType=x-scheme-handler/http;x-scheme-handler/https;
+NoDisplay=false
+
